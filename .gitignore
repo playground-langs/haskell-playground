@@ -97,4 +97,5 @@ cabal.project.local~
 .ghc.environment.*
 stack.*.lock
 .idea/sonarlint
+.DS_Store
 

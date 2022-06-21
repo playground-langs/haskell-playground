@@ -1,3 +1,4 @@
+module BaseListCases where
 -- List相加 ++ 会遍历第一个List
 l1 = [1, 2, 3] ++ [3, 4, 5]
 
