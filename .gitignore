@@ -98,4 +98,5 @@ cabal.project.local~
 stack.*.lock
 .idea/sonarlint
 .DS_Store
+./*.cabal
 
