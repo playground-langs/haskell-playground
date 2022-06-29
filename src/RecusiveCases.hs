@@ -1,8 +1,5 @@
 module RecusiveCases where
 
-import Data.Bits (Bits (xor))
-import System.Posix.Internals (c_ftruncate)
-
 -- 使用递归求List最大值
 maximum' [] = error "empty"
 maximum' [x] = x
@@ -30,3 +27,17 @@ reverse' [] = []
 reverse' (x : xs) = reverse' xs ++ [x]
 
 repeat' x = x : repeat' x
+
+zip' _ [] = []
+zip' [] _ = []
+zip' (x : xs) (y : ys) = (x, y) : zip' xs ys
+
+elem' x [] = False
+elem' x (y : ys) = (x == y) || elem' x ys
+
+-- 实现快排
+quicksort [] = []
+quicksort (x : xs) =
+  let smaller = quicksort [a | a <- xs, a <= x]
+      bigger = quicksort [a | a <- xs, a > x]
+   in smaller ++ [x] ++ bigger
