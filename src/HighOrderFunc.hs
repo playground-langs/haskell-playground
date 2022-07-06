@@ -163,5 +163,11 @@ a26 = map (\x -> negate (abs x)) [5, -3, -6]
 a27 = map (negate . abs) [5, -3, -6]
 
 -- 如果表达式以三个括号结尾 则可以改为函数组合形式
-a28 = replicate 100 (product (map (*3) (zipWith max [1,2,3,4,5] [4,5,6,7,8])))
-a29 = replicate 100 . product . map (*3) . zipWith max [1,2,3,4,5] $ [4,5,6,7,8]
+a28 = replicate 100 (product (map (* 3) (zipWith max [1, 2, 3, 4, 5] [4, 5, 6, 7, 8])))
+
+a29 = replicate 100 . product . map (* 3) . zipWith max [1, 2, 3, 4, 5] $ [4, 5, 6, 7, 8]
+
+-- point free style
+fn x = ceiling (negate (tan (cos (max 50 x))))
+
+fn' x = ceiling . negate . tan . cos . max 50
