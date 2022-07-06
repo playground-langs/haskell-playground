@@ -127,6 +127,7 @@ product' = foldl1 (*)
 
 filter''' :: (a -> Bool) -> [a] -> [a]
 filter''' p = foldr (\x acc -> if p x then x : acc else acc) []
+
 -- 以下head和last实现仅为了使用fold使用 使用模式匹配的实现最佳
 head' :: [a] -> a
 head' = foldr1 (\x _ -> x)
@@ -135,3 +136,32 @@ last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
 
 -- scanl scanr与foldl foldr执行过程类似但会返回累加值的列表
+-- a21 = [1,3,6,10,15]
+a21 = scanl (+) 0 [1, 2, 3, 4, 5]
+
+-- $ 函数调用符 定义为 f $ x = f x
+-- 普通函数调用符(空格)具有最高优先级,是左结合的 f a b c ==> (((f a) b) c)
+
+-- $是右结合的,具有最低优先级 f $ a b c ==> f (a b c) 作用是减少括号的数量
+
+a22 = sum (filter (> 10) (map (* 2) [2 .. 10]))
+
+a23 = sum $ filter (> 10) $ map (* 2) [2 .. 10]
+
+-- $ 还可以将数据作为函数使用
+
+a24 = map ($ 3) [(4 +), (10 *), (^ 2), sqrt]
+
+a25 = [4 + 3, 10 * 3, 3 ^ 2, sqrt 3]
+
+-- 函数组合
+-- f . g = \x ->f (g x) f的参数类型必须为g的返回值类型
+-- 函数组合可以生成新函数
+
+a26 = map (\x -> negate (abs x)) [5, -3, -6]
+
+a27 = map (negate . abs) [5, -3, -6]
+
+-- 如果表达式以三个括号结尾 则可以改为函数组合形式
+a28 = replicate 100 (product (map (*3) (zipWith max [1,2,3,4,5] [4,5,6,7,8])))
+a29 = replicate 100 . product . map (*3) . zipWith max [1,2,3,4,5] $ [4,5,6,7,8]
